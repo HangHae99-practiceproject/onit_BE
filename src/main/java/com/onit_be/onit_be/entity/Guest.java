@@ -19,8 +19,8 @@ public class Guest {
     @Column(nullable = false)
     private String ninkName;
 
-    @Column(nullable = false)
-    private String profileImg;
+//    @Column(nullable = false)
+//    private String profileImg;
 
     @Enumerated(EnumType.STRING)
     private UserRoleEnum userRole;

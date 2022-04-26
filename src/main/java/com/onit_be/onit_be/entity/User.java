@@ -36,12 +36,15 @@ public class User {
     @Column(unique = true)
     private Long kakaoId;
 
+    //수정 한 부분 . 일반 회원 가입 시에는  USER 로 ROLE 등록 .
     @Enumerated(EnumType.STRING)
     private UserRoleEnum userRole;
 
-    @OneToMany(mappedBy = "user")
-    @JoinColumn
-    private List<Plan> planList = new ArrayList<>();
+
+
+//    @OneToMany(mappedBy = "user")
+//    @JoinColumn
+//    private List<Plan> planList = new ArrayList<>();
 
 
     User(Builder builder) {
@@ -50,6 +53,13 @@ public class User {
         this.password = builder.password;
         this.profileImg = builder.profileImg;
         this.kakaoId = builder.kakaoId;
+    }
+
+    public User(String username, String password, String userNickname, UserRoleEnum role) {
+        this.username = username;
+        this.password = password;
+        this.userNickname = userNickname;
+        this.userRole = role;
     }
 
     public static class Builder {

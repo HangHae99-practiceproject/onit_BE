@@ -21,6 +21,7 @@ public class FormLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
         // Token 생성
         final String token = JwtTokenUtils.generateJwtToken(userDetails);
         response.addHeader(AUTH_HEADER, TOKEN_TYPE + " " + token);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 
 }

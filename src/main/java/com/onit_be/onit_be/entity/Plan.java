@@ -31,5 +31,6 @@ public class Plan extends TimeStamped{
     private User user;
 
     @OneToMany
+    @JoinColumn
     private List<Guest> guests;
 }

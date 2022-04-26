@@ -4,20 +4,19 @@ package com.onit_be.onit_be.service;
 import com.onit_be.onit_be.dto.IdCheckDto;
 import com.onit_be.onit_be.dto.LoginDto;
 import com.onit_be.onit_be.dto.SignupRequestDto;
+import com.onit_be.onit_be.dto.UserInfoDto;
 import com.onit_be.onit_be.entity.User;
+import com.onit_be.onit_be.entity.UserRoleEnum;
 import com.onit_be.onit_be.repository.UserRepository;
+import com.onit_be.onit_be.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @Service
-
 public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -36,15 +35,17 @@ public class UserService {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
         String userNickname = requestDto.getUserNickname();
-        System.out.println(username);
-        // 중복 로그인 확인
+
+        // 중복 아이디 확인   == 프론트 분들과 얘기 필요 유효성검증 어떤 부분에서 할 것인지 /
         if (userRepository.existsByUsername(username)){
             throw new IllegalArgumentException("이미 사용중인 아이디 입니다!");
         }
-        if (userRepository.existsByUserNickname(userNickname)){
-            throw new IllegalArgumentException("이미 사용중인 닉네임 입니다!");
 
-        }
+//        if (userRepository.existsByUserNickname(userNickname)){
+//            throw new IllegalArgumentException("이미 사용중인 닉네임 입니다!");
+//
+//        }
+
         if(!username.matches("^[a-z0-9-_]{3,10}$")){
             throw new IllegalArgumentException("아이디는 영어와 숫자로 3~9자리로 입력하셔야 합니다!");
         }
@@ -52,30 +53,21 @@ public class UserService {
             throw new IllegalArgumentException("비빌번호는 영어와 숫자로 4~12 자리로 입력하셔야 합니다!");
         }
 
-
-
-
-        User user = new User(username, password,userNickname);
+        //사용자 ROLE 을 생성 하는 부분 추가 .
+        UserRoleEnum role = UserRoleEnum.USER;
+        User user = new User(username, password,userNickname,role);
        return userRepository.save(user);
     }
 
-    //검증 데이터 메세지.
-    public Map<String, String> validateHandling(Errors errors) {
-        Map<String, String> validatorResult = new HashMap<>();
-
-        for (FieldError error : errors.getFieldErrors()) {
-            String validKeyName = String.format("valid_%s", error.getField());
-            validatorResult.put(validKeyName, error.getDefaultMessage());
-        }
-        return validatorResult;
-    }
     //아이디 중복검사
     public IdCheckDto vaildId(LoginDto requestDto) {
         String username = requestDto.getUsername();
         IdCheckDto idCheckDto = new IdCheckDto();
         idCheckDto.setResult(!userRepository.existsByUsername(username));
-
       return idCheckDto;
     }
 
+//    public UserInfoDto getUserInfo(UserDetailsImpl userDetails) {
+//        return UserInfoDto;
+//    }
 }
