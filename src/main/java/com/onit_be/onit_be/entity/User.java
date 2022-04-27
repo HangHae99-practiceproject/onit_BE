@@ -36,7 +36,7 @@ public class User {
     @Column(unique = true)
     private Long kakaoId;
 
-    //수정 한 부분 . 일반 회원 가입 시에는  USER 로 ROLE 등록 .
+    //수정 한 부분 . 일반 회원 가입 시에는  USER 로 ROLE 등록
     @Enumerated(EnumType.STRING)
     private UserRoleEnum userRole;
 
