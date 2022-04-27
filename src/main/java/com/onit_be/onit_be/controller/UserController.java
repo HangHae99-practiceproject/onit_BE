@@ -8,6 +8,7 @@ import com.onit_be.onit_be.entity.User;
 import com.onit_be.onit_be.security.UserDetailsImpl;
 import com.onit_be.onit_be.service.KakaoUserService;
 import com.onit_be.onit_be.service.UserService;
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,9 +31,9 @@ public class UserController {
 
     // 회원 가입 요청 처리
     @PostMapping("/user/signup")
-    public ResponseEntity<User> registerUser(@RequestBody SignupRequestDto requestDto) {
+    public ResponseEntity<Object> registerUser(@RequestBody SignupRequestDto requestDto) {
         User user = userService.registerUser(requestDto);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok().body(user);
     }
 
     //아이디 중복 검사
@@ -46,7 +47,6 @@ public class UserController {
 //    public UserInfoDto getUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails){
 //        return userService.getUserInfo(userDetails);
 //    }
-
 
    // 카카오 로그인
     @GetMapping("/users/kakao/callback")
