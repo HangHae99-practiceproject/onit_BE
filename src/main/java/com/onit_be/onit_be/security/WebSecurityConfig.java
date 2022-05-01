@@ -148,7 +148,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("POST,/api/logout");
 
         //게시글 조회
-        skipPathList.add("GET,/api/post");
+        skipPathList.add("GET,/member/list/{user_id}");
         skipPathList.add("GET,/api/post/{postId}");
 
         //skipPathList.add("GET,/home");

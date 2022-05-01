@@ -1,4 +1,4 @@
-package com.onit_be.onit_be.Exception;
+package com.onit_be.onit_be.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

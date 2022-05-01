@@ -1,4 +1,4 @@
-package com.onit_be.onit_be.Exception;
+package com.onit_be.onit_be.exception;
 
 import lombok.Getter;
 import lombok.Setter;

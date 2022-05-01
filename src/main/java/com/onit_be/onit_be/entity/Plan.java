@@ -1,12 +1,11 @@
 package com.onit_be.onit_be.entity;
 
+import com.onit_be.onit_be.dto.request.PlanRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import javax.xml.stream.Location;
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Entity
 @Getter
@@ -30,7 +29,10 @@ public class Plan extends TimeStamped{
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
-    @JoinColumn
-    private List<Guest> guests;
+    public Plan(PlanRequestDto planRequestDto, User user) {
+        this.planName = planRequestDto.getPlanName();
+        this.planDate = planRequestDto.getPlanDate();
+        this.user = user;
+        this.location = planRequestDto.getLocation();
+    }
 }

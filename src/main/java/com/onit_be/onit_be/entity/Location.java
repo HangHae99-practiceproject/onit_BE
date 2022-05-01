@@ -1,5 +1,6 @@
 package com.onit_be.onit_be.entity;
 
+import com.onit_be.onit_be.dto.request.PlanRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,11 +19,6 @@ public class Location {
     //경도
     private double lng;
 
-    private String categoryName;
-
-    private String categoryCode;
-
     private String address;
 
-    private String locationImgUrl;
 }
