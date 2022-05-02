@@ -1,17 +1,19 @@
 package com.onit_be.onit_be.entity;
 
 import com.onit_be.onit_be.dto.request.PlanReqDto;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_plan")
-public class Plan extends TimeStamped{
+public class Plan extends TimeStamped implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

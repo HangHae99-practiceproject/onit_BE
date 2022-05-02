@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class PlanResDto {
+public class PlanResDto implements Serializable {
 
     private Long planId;
     private LocalDateTime planDate;

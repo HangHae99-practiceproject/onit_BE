@@ -5,12 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Embeddable
-public class Location {
+public class Location implements Serializable {
 
     private String name;
     //위도

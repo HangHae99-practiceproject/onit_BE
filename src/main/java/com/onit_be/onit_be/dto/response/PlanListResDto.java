@@ -5,12 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class PlanListResDto {
+public class PlanListResDto implements Serializable {
+
+    private static final long serialVersionUID = 6494678977089006639L;
+
     private List<PlanResDto> planList;
     private int totalPage;
     private int currentPage;

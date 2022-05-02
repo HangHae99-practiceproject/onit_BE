@@ -2,6 +2,7 @@ package com.onit_be.onit_be.controller;
 
 import com.onit_be.onit_be.aop.LogExecutionTime;
 
+import com.onit_be.onit_be.config.CacheKey;
 import com.onit_be.onit_be.dto.request.PlanReqDto;
 import com.onit_be.onit_be.dto.response.PlanListResDto;
 import com.onit_be.onit_be.security.UserDetailsImpl;
@@ -9,6 +10,7 @@ import com.onit_be.onit_be.service.PlanService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,7 @@ public class PlanController {
     //마이페이지 .List  username 으로 식별 .
     //페이징 처리 , (과거 ,미래 , 오늘 ) 로 리스트가 나가며
     @GetMapping("/member/list/{userid}/{pageno}")
+    @Cacheable(value = CacheKey.PLAN, key = "#userid" , unless = "#result == null ")
     @LogExecutionTime
     public PlanListResDto getPlanList(@PathVariable Long userid, @PathVariable int pageno){
         return new PlanListResDto(planService.getPlanList(userid,pageno -1));
