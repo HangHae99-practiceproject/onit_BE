@@ -1,6 +1,6 @@
 package com.onit_be.onit_be.entity;
 
-import com.onit_be.onit_be.dto.request.PlanRequestDto;
+import com.onit_be.onit_be.dto.request.PlanReqDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -29,10 +29,22 @@ public class Plan extends TimeStamped{
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Plan(PlanRequestDto planRequestDto, User user) {
+    private String writer;
+
+    private String penalty;
+
+    public Plan(PlanReqDto planRequestDto, User user) {
         this.planName = planRequestDto.getPlanName();
         this.planDate = planRequestDto.getPlanDate();
         this.user = user;
+        this.location = planRequestDto.getLocation();
+        this.writer = user.getUserNickname();
+        this.penalty = planRequestDto.getPenalty();
+    }
+
+    public void update(PlanReqDto planRequestDto) {
+        this.planName = planRequestDto.getPlanName();
+        this.planDate = planRequestDto.getPlanDate();
         this.location = planRequestDto.getLocation();
     }
 }

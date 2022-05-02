@@ -13,22 +13,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PlanRequestDto {
+public class PlanReqDto {
     private String planName;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime planDate;
     private Location location;
-
-//    private String locationName;
-//    //위도
-//    private double locationLat;
-//    //경도
-//     private double locationLng;
-//
-//     private String address;
-
-
-
-
+    private String penalty;
 
 }

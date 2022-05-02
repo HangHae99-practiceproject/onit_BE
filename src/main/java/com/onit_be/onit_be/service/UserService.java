@@ -1,14 +1,11 @@
 package com.onit_be.onit_be.service;
 
-
-import com.onit_be.onit_be.dto.IdCheckDto;
-import com.onit_be.onit_be.dto.LoginDto;
-import com.onit_be.onit_be.dto.SignupRequestDto;
-import com.onit_be.onit_be.dto.UserInfoDto;
+import com.onit_be.onit_be.dto.request.LoginReqDto;
+import com.onit_be.onit_be.dto.request.SignupReqDto;
+import com.onit_be.onit_be.dto.response.IdCheckResDto;
 import com.onit_be.onit_be.entity.User;
 import com.onit_be.onit_be.entity.UserRoleEnum;
 import com.onit_be.onit_be.repository.UserRepository;
-import com.onit_be.onit_be.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,7 +27,7 @@ public class UserService {
 
     //회원가입 수정 .
     @Transactional
-    public User registerUser(SignupRequestDto requestDto) {
+    public User registerUser(SignupReqDto requestDto) {
 
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -60,14 +57,11 @@ public class UserService {
     }
 
     //아이디 중복검사
-    public IdCheckDto vaildId(LoginDto requestDto) {
+    public IdCheckResDto vaildId(LoginReqDto requestDto) {
         String username = requestDto.getUsername();
-        IdCheckDto idCheckDto = new IdCheckDto();
+        IdCheckResDto idCheckDto = new IdCheckResDto();
         idCheckDto.setResult(!userRepository.existsByUsername(username));
       return idCheckDto;
     }
 
-//    public UserInfoDto getUserInfo(UserDetailsImpl userDetails) {
-//        return UserInfoDto;
-//    }
 }

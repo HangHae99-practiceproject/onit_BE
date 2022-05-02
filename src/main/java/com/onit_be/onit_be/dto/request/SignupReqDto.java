@@ -1,4 +1,4 @@
-package com.onit_be.onit_be.dto;
+package com.onit_be.onit_be.dto.request;
 
 
 import lombok.Data;
@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Setter
 @Getter
 @Data
-public class SignupRequestDto {
+public class SignupReqDto {
 
     @NotBlank(message = "아이디를 입력해 주세요!")
     @Pattern(regexp = "^[a-z0-9-_]{3,10}$", message = "아이디는 영여와 숫자만 입력이 가능합니다!")

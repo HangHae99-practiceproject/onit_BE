@@ -10,12 +10,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PlanListResponseDto {
-    private List<PlanResponseDto> planList;
+public class PlanListResDto {
+    private List<PlanResDto> planList;
     private int totalPage;
     private int currentPage;
 
-    public PlanListResponseDto(Page<PlanResponseDto> page) {
+    public PlanListResDto(Page<PlanResDto> page) {
         this.planList = page.getContent();
         this.totalPage = page.getTotalPages();
         this.currentPage = page.getNumber();

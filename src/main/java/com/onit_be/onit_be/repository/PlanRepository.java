@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PlanRepository extends JpaRepository<Plan,Long> {
     List<Plan> findAllByUserOrderByPlanDateAsc(User user);
+    List<Plan> findAllByWriter(String writer);
 }

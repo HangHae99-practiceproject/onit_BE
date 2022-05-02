@@ -1,4 +1,4 @@
-package com.onit_be.onit_be.dto;
+package com.onit_be.onit_be.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class LoginDto {
+public class LoginReqDto {
     private String username;
 }

@@ -4,7 +4,7 @@ package com.onit_be.onit_be.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.onit_be.onit_be.dto.KakaoUserInfoDto;
+import com.onit_be.onit_be.dto.response.KakaoUserInfoResDto;
 import com.onit_be.onit_be.entity.User;
 import com.onit_be.onit_be.repository.UserRepository;
 import com.onit_be.onit_be.security.UserDetailsImpl;
@@ -35,12 +35,12 @@ public class KakaoUserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public KakaoUserInfoDto kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
+    public KakaoUserInfoResDto kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
         // 1. "인가 코드"로 "액세스 토큰" 요청
         String accessToken = getAccessToken(code);
 
         // 2. 토큰으로 카카오 API 호출
-        KakaoUserInfoDto kakaoUserInfoDto = getKakaoUserInfo(accessToken);
+        KakaoUserInfoResDto kakaoUserInfoDto = getKakaoUserInfo(accessToken);
 
         // 3. 카카오ID로 회원가입 처리
         User kakaoUser = signupKakaoUser(kakaoUserInfoDto);
@@ -67,7 +67,7 @@ public class KakaoUserService {
         return authentication;
     }
 
-    private User signupKakaoUser(KakaoUserInfoDto kakaoUserInfoDto) {
+    private User signupKakaoUser(KakaoUserInfoResDto kakaoUserInfoDto) {
         // DB 에 중복된 Kakao Id 가 있는지 확인
         Long kakaoId = kakaoUserInfoDto.getId();
         User kakaoUser = userRepository.findByKakaoId(kakaoId)
@@ -102,7 +102,7 @@ public class KakaoUserService {
         return kakaoUser;
     }
 
-    private KakaoUserInfoDto getKakaoUserInfo(String accessToken) throws JsonProcessingException {
+    private KakaoUserInfoResDto getKakaoUserInfo(String accessToken) throws JsonProcessingException {
         // HTTP Header 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -135,7 +135,7 @@ public class KakaoUserService {
 
 //        System.out.println("카카오 사용자 정보: " + id + ", " + nickname);
         log.info("카카오 사용자 정보 id: {},{}",id,nickname);
-        return new KakaoUserInfoDto(id, nickname);
+        return new KakaoUserInfoResDto(id, nickname);
 
     }
 
