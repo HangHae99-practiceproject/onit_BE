@@ -43,6 +43,14 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
     implementation 'com.auth0:java-jwt:3.13.0'
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
+
+    //redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    compileOnly('org.springframework.session:spring-session-data-redis')
+
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.ehcache:ehcache:3.8.0'
+    implementation 'javax.cache:cache-api:1.1.0'
 }
 
 tasks.named('test') {

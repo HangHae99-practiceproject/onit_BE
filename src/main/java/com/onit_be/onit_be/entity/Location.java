@@ -1,6 +1,5 @@
 package com.onit_be.onit_be.entity;
 
-import com.onit_be.onit_be.dto.request.PlanRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
