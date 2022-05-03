@@ -10,6 +10,8 @@ import com.onit_be.onit_be.service.PlanService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -28,18 +30,20 @@ public class PlanController {
     @LogExecutionTime
     @PostMapping("/member/plan")
     public void createPlan(@RequestBody PlanReqDto planRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-
         planService.createPlan(planRequestDto,userDetails.getUser());
     }
 
     //마이페이지 .List  username 으로 식별 .
     //페이징 처리 , (과거 ,미래 , 오늘 ) 로 리스트가 나가며
     @GetMapping("/member/list/{userid}/{pageno}")
-    @Cacheable(value = CacheKey.PLAN, key = "#userid" , unless = "#result == null ")
     @LogExecutionTime
     public PlanListResDto getPlanList(@PathVariable Long userid, @PathVariable int pageno){
         return new PlanListResDto(planService.getPlanList(userid,pageno -1));
     }
+
+    //일정 상세 페이지 api
+    //@GetMapping("/member")
+
 
     //나의 일정 수정하기 (일정을 만든 사람만 .)
     //수정에서 리스폰스 값이 필요한지 얘기 .

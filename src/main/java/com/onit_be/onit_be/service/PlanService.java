@@ -1,5 +1,6 @@
 package com.onit_be.onit_be.service;
 
+import com.onit_be.onit_be.config.CacheKey;
 import com.onit_be.onit_be.dto.request.PlanReqDto;
 import com.onit_be.onit_be.dto.response.PlanResDto;
 import com.onit_be.onit_be.entity.Location;
@@ -10,6 +11,7 @@ import com.onit_be.onit_be.repository.UserRepository;
 import com.onit_be.onit_be.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -32,17 +34,16 @@ public class PlanService {
 
     //Plan 만들기 .
     @Transactional
+    //@CacheEvict(value = CacheKey.PLAN, key ="#user.id")
     public void createPlan(PlanReqDto planRequestDto, User user) {
         // 1. 현재 로그인한 유저의 닉네임으로 등록된 모든 plan list 를 조회.
         List<Plan> planList = planRepository.findAllByWriter(user.getUserNickname());
         LocalDateTime today = planRequestDto.getPlanDate();
         for (Plan plan : planList) {
             //2.이중약속에 대한 처리 .
-            //long remainHour = ChronoUnit.HOURS.between(plan.getPlanDate().toLocalTime(), planRequestDto.getPlanDate().toLocalTime());
             int comResult = compareDay(plan.getPlanDate(),today);
             if (comResult == 0) {
                 long remainHour = ChronoUnit.HOURS.between(plan.getPlanDate().toLocalTime(), planRequestDto.getPlanDate().toLocalTime());
-                System.out.println(remainHour);
                 //3.이중약속이 아니면서 약속시간 기준 +- 2 에 해당하는 약속 x
                 //ex) 6시 에 일정이 있으면 4시 부터 8시 사이에는 일정을 잡지 못하게 .
                 if (!(remainHour > 2 || remainHour < -2))
@@ -116,6 +117,7 @@ public class PlanService {
 
     //일정 수정.
     @Transactional
+    @CachePut(value = CacheKey.PLAN, key ="#userDetails.user.id")
     public void editPlan(Long planid, PlanReqDto planRequestDto, UserDetailsImpl userDetails) {
         Plan plan = planRepository.findById(planid).orElseThrow(IllegalArgumentException::new);
         plan.update(planRequestDto);
