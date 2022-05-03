@@ -25,12 +25,14 @@ public class WebSockConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/sub");
+        //해당 url로 접근하면 핸들러로 접근 .
         config.setApplicationDestinationPrefixes("/pub");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws-stomp").setAllowedOrigins("*")
+        registry.addEndpoint("/ws-stomp")
+                .setAllowedOrigins("*")
                 .withSockJS();
     }
 }
