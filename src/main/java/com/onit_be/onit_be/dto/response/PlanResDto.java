@@ -18,11 +18,13 @@ public class PlanResDto implements Serializable {
     private LocalDateTime planDate;
     private Location locationDetail;
     private int status;
+    private boolean writer;
 
-    public PlanResDto(Long planId, LocalDateTime planDate, Location locationDetail, int status) {
+    public PlanResDto(Long planId, LocalDateTime planDate, Location locationDetail, int status, boolean result) {
         this.planId = planId;
         this.planDate = planDate;
         this.locationDetail = locationDetail;
         this.status = status;
+        this.writer = result;
     }
 }

@@ -38,8 +38,8 @@ public class PlanController {
     //페이징 처리 , (과거 ,미래 , 오늘 ) 로 리스트가 나가며
     @GetMapping("/member/list/{userid}/{pageno}")
     @LogExecutionTime
-    public PlanListResDto getPlanList(@PathVariable Long userid, @PathVariable int pageno){
-        return new PlanListResDto(planService.getPlanList(userid,pageno -1));
+    public PlanListResDto getPlanList(@PathVariable Long userid, @PathVariable int pageno,@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return new PlanListResDto(planService.getPlanList(userid,pageno -1,userDetails));
     }
 
     //일정 상세 페이지 api

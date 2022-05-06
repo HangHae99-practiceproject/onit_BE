@@ -20,7 +20,7 @@ public class User {
     private Long id;
 
     @Column
-    private String userNickname;
+    private String nickName;
 
     @Column
     private String password;
@@ -40,6 +40,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRoleEnum userRole;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Plan> planList = new ArrayList<>();
 
 
 //    @OneToMany(mappedBy = "user")
@@ -49,16 +51,16 @@ public class User {
 
     User(Builder builder) {
         this.username = builder.username;
-        this.userNickname = builder.nickname;
+        this.nickName = builder.nickname;
         this.password = builder.password;
         this.profileImg = builder.profileImg;
         this.kakaoId = builder.kakaoId;
     }
 
-    public User(String username, String password, String userNickname, UserRoleEnum role) {
+    public User(String username, String password, String nickName, UserRoleEnum role) {
         this.username = username;
         this.password = password;
-        this.userNickname = userNickname;
+        this.nickName = nickName;
         this.userRole = role;
     }
 
@@ -93,18 +95,18 @@ public class User {
     }
 
     public void updateNicknameAndProfileImg(String nickname, String imgUrl) {
-        this.userNickname = nickname;
+        this.nickName = nickname;
         this.profileImg = imgUrl;
     }
 
     public void updateNickname(String nickname) {
-        this.userNickname = nickname;
+        this.nickName = nickname;
     }
 
-    public User(String username, String password, String userNickname) {
+    public User(String username, String password, String nickName) {
         this.username = username;
         this.password = password;
-        this.userNickname = userNickname;
+        this.nickName = nickName;
     }
 
 }

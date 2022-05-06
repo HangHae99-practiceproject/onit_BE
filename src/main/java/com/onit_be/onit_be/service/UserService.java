@@ -31,7 +31,7 @@ public class UserService {
 
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
-        String userNickname = requestDto.getUserNickname();
+        String nickName = requestDto.getUserNickname();
 
         // 중복 아이디 확인   == 프론트 분들과 얘기 필요 유효성검증 어떤 부분에서 할 것인지 /
         if (userRepository.existsByUsername(username)){
@@ -52,7 +52,7 @@ public class UserService {
 
         //사용자 ROLE 을 생성 하는 부분 추가 .
         UserRoleEnum role = UserRoleEnum.USER;
-        User user = new User(username, password,userNickname,role);
+        User user = new User(username, password,nickName,role);
        return userRepository.save(user);
     }
 
@@ -60,7 +60,14 @@ public class UserService {
     public IdCheckResDto vaildId(LoginReqDto requestDto) {
         String username = requestDto.getUsername();
         IdCheckResDto idCheckDto = new IdCheckResDto();
-        idCheckDto.setResult(!userRepository.existsByUsername(username));
+        if(!userRepository.existsByUsername(username)){
+            idCheckDto.setResult(!userRepository.existsByUsername(username));
+            idCheckDto.setMessage("사용할 수 있는 아이디입니다.");
+        }else{
+            idCheckDto.setResult(!userRepository.existsByUsername(username));
+            idCheckDto.setMessage("이미 존재하는 아이디입니다.");
+        }
+
       return idCheckDto;
     }
 

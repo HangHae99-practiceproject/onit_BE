@@ -36,18 +36,29 @@ public class Plan extends TimeStamped implements Serializable {
     //일정을 추가할때 패널티를 클라이언트로 받아오기로 했습니다 . 때문에 DB에 저장해놨다가 보여줘야 할꺼 같아서 컬럼을 추가했습니다~
     private String penalty;
 
+    private String url;
+
     public Plan(PlanReqDto planRequestDto, User user) {
         this.planName = planRequestDto.getPlanName();
         this.planDate = planRequestDto.getPlanDate();
         this.user = user;
         this.location = planRequestDto.getLocation();
-        this.writer = user.getUserNickname();
+        this.writer = user.getNickName();
         this.penalty = planRequestDto.getPenalty();
     }
 
-    public void update(PlanReqDto planRequestDto) {
+    public void update(PlanReqDto planRequestDto, LocalDateTime editTime) {
         this.planName = planRequestDto.getPlanName();
-        this.planDate = planRequestDto.getPlanDate();
+        this.planDate = editTime;
         this.location = planRequestDto.getLocation();
+    }
+
+    public void addPlan(User user) {
+        this.user = user;
+        user.getPlanList().add(this);
+    }
+
+    public void addUrl(String url) {
+        this.url = url;
     }
 }
