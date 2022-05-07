@@ -1,0 +1,74 @@
+package com.onit_be.onit_be.service;
+
+import com.onit_be.onit_be.dto.request.LoginReqDto;
+import com.onit_be.onit_be.dto.request.SignupReqDto;
+import com.onit_be.onit_be.dto.response.IdCheckResDto;
+import com.onit_be.onit_be.entity.User;
+import com.onit_be.onit_be.entity.UserRoleEnum;
+import com.onit_be.onit_be.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+
+@Service
+public class UserService {
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+
+
+    @Autowired
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    //회원가입 수정 .
+    @Transactional
+    public User registerUser(SignupReqDto requestDto) {
+
+        String username = requestDto.getUsername();
+        String password = passwordEncoder.encode(requestDto.getPassword());
+        String nickName = requestDto.getUserNickname();
+
+        // 중복 아이디 확인   == 프론트 분들과 얘기 필요 유효성검증 어떤 부분에서 할 것인지 /
+        if (userRepository.existsByUsername(username)){
+            throw new IllegalArgumentException("이미 사용중인 아이디 입니다!");
+        }
+
+//        if (userRepository.existsByUserNickname(userNickname)){
+//            throw new IllegalArgumentException("이미 사용중인 닉네임 입니다!");
+//
+//        }
+
+        if(!username.matches("^[a-z0-9-_]{3,10}$")){
+            throw new IllegalArgumentException("아이디는 영어와 숫자로 3~9자리로 입력하셔야 합니다!");
+        }
+        if(!requestDto.getPassword().matches("^[a-z0-9-_]{4,10}$")){
+            throw new IllegalArgumentException("비빌번호는 영어와 숫자로 4~12 자리로 입력하셔야 합니다!");
+        }
+
+        //사용자 ROLE 을 생성 하는 부분 추가 .
+        UserRoleEnum role = UserRoleEnum.USER;
+        User user = new User(username, password,nickName,role);
+       return userRepository.save(user);
+    }
+
+    //아이디 중복검사
+    public IdCheckResDto vaildId(LoginReqDto requestDto) {
+        String username = requestDto.getUsername();
+        IdCheckResDto idCheckDto = new IdCheckResDto();
+        if(!userRepository.existsByUsername(username)){
+            idCheckDto.setResult(!userRepository.existsByUsername(username));
+            idCheckDto.setMessage("사용할 수 있는 아이디입니다.");
+        }else{
+            idCheckDto.setResult(!userRepository.existsByUsername(username));
+            idCheckDto.setMessage("이미 존재하는 아이디입니다.");
+        }
+
+      return idCheckDto;
+    }
+
+}
