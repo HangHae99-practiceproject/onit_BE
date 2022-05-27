@@ -52,10 +52,10 @@ public class MyPageController {
     }
 
     // 내가 참여한 일정 삭제 .
-    @LogExecutionTime
-    @DeleteMapping("/invitation/{randomUrl}")
-    public ResponseEntity<ResultDto> deletePlan (@PathVariable("randomUrl") String url, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        mypageService.deleteInvitationPlan(url, userDetails.getUser());
-        return ResponseEntity.ok().body(new ResultDto("내가 참여한 일정 삭제 성공!"));
-    }
+//    @LogExecutionTime
+//    @DeleteMapping("/invitation/{randomUrl}")
+//    public ResponseEntity<ResultDto> deletePlan (@PathVariable("randomUrl") String url, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+//        mypageService.deleteInvitationPlan(url, userDetails.getUser());
+//        return ResponseEntity.ok().body(new ResultDto("내가 참여한 일정 삭제 성공!"));
+//    }
 }

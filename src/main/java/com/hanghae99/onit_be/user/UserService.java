@@ -1,5 +1,6 @@
 package com.hanghae99.onit_be.user;
 
+import com.google.auth.oauth2.GoogleCredentials;
 import com.hanghae99.onit_be.entity.User;
 import com.hanghae99.onit_be.entity.UserRoleEnum;
 import com.hanghae99.onit_be.plan.PlanRepository;
@@ -9,12 +10,17 @@ import com.hanghae99.onit_be.user.dto.LoginReqDto;
 import com.hanghae99.onit_be.user.dto.SignupReqDto;
 import com.hanghae99.onit_be.common.utils.Valid;
 import com.hanghae99.onit_be.user.dto.UserInfoResDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.util.Arrays;
 
+@Slf4j
 @Service
 public class UserService {
     private final PasswordEncoder passwordEncoder;
@@ -62,7 +68,7 @@ public class UserService {
 
     // 클라이언트로 부터 devicetoken 을 받을시에 user 테이블에 devicetoken 저장, token이 존재하면 알림여부 true , 없다면 false
     @Transactional
-    public void updateDeviceToken(String token, Long id) {
+    public void updateDeviceToken(String token, Long id) throws IOException {
         User user = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         if (token != null) {
             user.setNoticeAllowedTrue();
@@ -72,6 +78,7 @@ public class UserService {
         }
         user.updateToken(token);
     }
+
 
     // 회원 정보
     public UserInfoResDto getUserInfo(User user) {

@@ -1,7 +1,6 @@
 package com.hanghae99.onit_be.mypage;
 
 import com.hanghae99.onit_be.mypage.dto.RecordResDto;
-import com.hanghae99.onit_be.noti.event.PlanDeleteEvent;
 import com.hanghae99.onit_be.plan.dto.PlanDetailResDto;
 import com.hanghae99.onit_be.mypage.dto.ProfileResDto;
 import com.hanghae99.onit_be.entity.Participant;
@@ -58,12 +57,14 @@ public class MyPageService {
         // 새로운 이미지 > S3 업로드 > 이미지 Url 생성
         String fileName = createFileName(multipartFile.getOriginalFilename());
         String imageUrl = s3Uploader.updateFile(multipartFile, oldImgName, fileName);
-        User profile = new User(user.getId(), imageUrl);
+//        User profile = new User(user.getId(), imageUrl);
 
         // 새로운 이미지 Url을 파싱해서 파일명으로만 DB에 저장
         String[] newImgUrl = imageUrl.split("/");
         String imageKey = newImgUrl[newImgUrl.length - 1];
         user.update(user.getId(), imageKey);
+
+//        return new ProfileResDto(profile);
     }
 
     // 이미지 파일명 변환 관련 메소드
@@ -117,6 +118,7 @@ public class MyPageService {
     }
 
 
+
     // 지난 일정 목록 조회
     public Page<RecordResDto> getPlanHistory(User user, int pageno) {
         List<Plan> planList = planRepository.findAllByUserOrderByPlanDateDesc(userRepository.findById(user.getId()).orElseThrow(IllegalArgumentException::new));
@@ -147,16 +149,5 @@ public class MyPageService {
         Page<RecordResDto> page = new PageImpl<>(recordResDtoList.subList(start, end), pageable, recordResDtoList.size());
         return page;
 
-    }
-
-    // 참가한 목록에서 지우기 .
-    @Transactional
-    public void deleteInvitationPlan(String url, User user) {
-        Plan plan = planRepository.findByUrl(url);
-        Participant participant = participantRepository.findByUserAndPlan(user,plan);
-        // 작성자만 삭제 가능
-        if (Objects.equals(participant.getUser().getId(), user.getId())) {
-            participantRepository.deleteByUserAndPlan(user, plan);
-        }
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 public class UserController {
@@ -58,7 +59,7 @@ public class UserController {
     @PostMapping("/member/devices")
     public ResponseEntity<Object> updateDeviceToken(@RequestBody @Valid DeviceTokenReqDto requestDto,
                                                     BindingResult bindingResult,
-                                                    @AuthenticationPrincipal UserDetailsImpl userDetails) {
+                                                    @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
         userService.updateDeviceToken(requestDto.getToken(), userDetails.getUser().getId());
         return ResponseEntity.ok().body(new ResultDto<>("저장 완료"));
     }

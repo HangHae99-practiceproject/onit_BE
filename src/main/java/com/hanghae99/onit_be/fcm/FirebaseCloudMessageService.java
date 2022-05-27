@@ -67,42 +67,46 @@ public class FirebaseCloudMessageService {
 //    }
 
     // 구독 디바이스 푸쉬(topic)
-    private void sendSubscribeTopic(List<String> registrationTokens, String planUrl)
+    private void sendSubscribeTopic(List<String> registrationTokens, String planUrl, String planId)
             throws FirebaseMessagingException, IOException {
+        log.info("9.플랜 아이디 확인==== " + planId);
 //        List<String> registrationTokens =
 //                Collections.singletonList(user.getToken());
-        log.info("9.유저 토큰 목록===== " + registrationTokens);
+        log.info("10.유저 토큰 목록===== " + registrationTokens);
 
         String fullPlanUrl = "https://imonit.co.kr/details/" + planUrl;
-        log.info("10.플랜 링크 확인==== " + fullPlanUrl);
+        log.info("11.플랜 링크 확인==== " + fullPlanUrl);
 
         // 디바이스 토큰 구독하기
         TopicManagementResponse response = FirebaseMessaging.getInstance()
-                .subscribeToTopic(registrationTokens, "alarm");
-        log.info("11.유저 토큰들 구독 확인===== " + registrationTokens);
+                .subscribeToTopic(registrationTokens, planId);
+        log.info("12.유저 토큰들 구독 확인===== " + registrationTokens);
 
-        System.out.println(response.getSuccessCount() + " // 10.토큰들 구독 성공");
+        System.out.println(response.getSuccessCount() + " // 13.토큰들 구독 성공");
 
         // 구독한 주제에 메세지 요청
+//        Message message = Message.builder()
+//                .setNotification(Notification.builder()
+//                        .setTitle("온잇(Onit)")
+//                        .setBody("약속시간 1시간 전입니다. 친구들의 위치를 확인해보세요!")
+//                        .build())
+//                .setTopic(planId)
+//                .setWebpushConfig(WebpushConfig.builder()
+//                        .setFcmOptions(WebpushFcmOptions.withLink(fullPlanUrl))
+//                        .build())
+//                .build();
         Message message = Message.builder()
-                .setNotification(Notification.builder()
-                        .setTitle("온잇(Onit)")
-                        .setBody("약속시간 1시간 전입니다. 친구들의 위치를 확인해보세요!")
-                        .build())
-                .setTopic("alarm")
                 .setWebpushConfig(WebpushConfig.builder()
+                        .setNotification(new WebpushNotification(
+                                "온잇(Onit)",
+                                "2-약속시간 1시간 전입니다. 친구들의 위치를 확인해보세요!"))
                         .setFcmOptions(WebpushFcmOptions.withLink(fullPlanUrl))
                         .build())
+                .setTopic(planId)
                 .build();
 
-
         String response2 = FirebaseMessaging.getInstance().send(message);
-        log.info("12.구독 메세지 전송===== " + response2);
-
-        // 메세지 요청 후 구독 해제
-        TopicManagementResponse response3 = FirebaseMessaging.getInstance().unsubscribeFromTopic(
-                registrationTokens, "alarm");
-        System.out.println(response3.getSuccessCount() + " // 13.토큰들 구독 해제");
+        log.info("14.구독 메세지 전송===== " + response2);
 
 //        OkHttpClient client = new OkHttpClient();
 //        RequestBody requestBody = RequestBody.create(String.valueOf(message), MediaType.get("application/json; charset=utf-8"));
@@ -117,6 +121,15 @@ public class FirebaseCloudMessageService {
 //        Response responseFcm = client.newCall(request).execute();
 //
 //        log.info("14.fcm 서버 응답===== " + Objects.requireNonNull(responseFcm.body()).string());
+    }
+
+    // 메세지 요청 후 구독 해제
+    public void unsubscribeToTopic (List<String> registrationTokens, String planId)
+            throws FirebaseMessagingException, IOException {
+        TopicManagementResponse response3 = FirebaseMessaging.getInstance().unsubscribeFromTopic(
+                registrationTokens, planId);
+        System.out.println(response3.getSuccessCount() + " // 15.토큰들 구독 해제");
+        log.info("토큰 구독 해제 확인==== " + registrationTokens.size());
     }
 
 
@@ -165,19 +178,14 @@ public class FirebaseCloudMessageService {
                     User user = participant.getUser();
 //                    sendSubscribeTopic(user);
                     registrationTokens.add(user.getToken());
-                    sendSubscribeTopic(registrationTokens,plan.getUrl());
+//                    sendSubscribeTopic(registrationTokens,plan.getUrl(), String.valueOf(plan.getId()));
                 }
 //                sendSubscribeTopic(registrationTokens,plan.getUrl());
+                sendSubscribeTopic(registrationTokens,plan.getUrl(), String.valueOf(plan.getId()));
+                unsubscribeToTopic(registrationTokens, String.valueOf(plan.getId()));
             }
         }
     }
-
-//     디바이스 토큰 > 주제 구독시키는 메서드
-//    public void postTopic( String deviceToken, String topic ) throws FirebaseMessagingException {
-//        List<String> registrationTokens = Arrays.asList(deviceToken);
-//        TopicManagementResponse response = FirebaseMessaging.getInstance().subscribeToTopic(registrationTokens, topic);
-////        FirebaseMessaging.getInstance().subscribeToTopic(registrationTokens, topic);
-//    }
 
     // 시간 일치 여부
     public static int compareHour(LocalDateTime date1, LocalDateTime date2) {
