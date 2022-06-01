@@ -136,8 +136,8 @@ public class MyPageService {
                 String planDateCv = planDate.format(DateTimeFormatter.ofPattern("M월 d일 E요일 HH:mm").withLocale(Locale.forLanguageTag("ko")));
                 String address = plan.getLocation().getAddress();
                 String penalty = plan.getPenalty();
-
-                RecordResDto recordResDto = new RecordResDto(planId, planName, planDateCv, address, penalty);
+                String url = plan.getUrl();
+                RecordResDto recordResDto = new RecordResDto(planId, planName, planDateCv, address, penalty,url);
                 recordResDtoList.add(recordResDto);
             }
         }

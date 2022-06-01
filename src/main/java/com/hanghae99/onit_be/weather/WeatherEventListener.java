@@ -45,37 +45,29 @@ public class WeatherEventListener {
     private final WeatherRepository weatherRepository;
     private final PlanRepository planRepository;
 
+    String API_KEY = "384994b16fb4098a5312b226bd2d76e5";
+    String PART = "current,minutely,hourly,alerts";
+    String LANG = "kr";
+
+
     //일정을 처음 등록할때 위도 경도로 날씨 api 호출 -> 기상 예측 정보를 데이터로 받아옴. (8 일치 )
-    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, fallbackExecution = true)
     public void handleWeatherCreateEvent(WeatherCreateEvent weatherCreateEvent) {
-
         Plan plan = weatherCreateEvent.getPlan();
-
-        log.info("위도 ={}", plan.getLocation().getLng());
-        log.info("경도 ={}", plan.getLocation().getLat());
-
         String address = plan.getLocation().getAddress();
         LocalDateTime dayDate1 = plan.getPlanDate().truncatedTo(ChronoUnit.DAYS);
-
-        String API_KEY = "384994b16fb4098a5312b226bd2d76e5";
-        String PART = "current,minutely,hourly,alerts";
-        String LANG = "kr";
-
         String urlString = "https://api.openweathermap.org/data/2.5/onecall?lat="
                 + plan.getLocation().getLat() +
                 "&lon=" + plan.getLocation().getLng() +
                 "&exclude=" + PART +
                 "&lang=" + LANG +
                 "&appid=" + API_KEY;
-
         try {
-
             String result = getApiResult(urlString);
             Gson gson = new Gson();
             Map<String, Object> jsonObject = creteJsonMap(result, gson);
             List<Map<String, Object>> jsonList = (List) jsonObject.get("daily");
             getWeatherData(plan, address, dayDate1, gson, jsonList);
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -121,7 +113,6 @@ public class WeatherEventListener {
             LocalDateTime planDate = plan.getPlanDate();
             Weather weather = new Weather(address, main, id2, temp, planDate, weatherTime, planId, icon);
             weatherRepository.save(weather);
-
         }
     }
 
@@ -211,21 +202,11 @@ public class WeatherEventListener {
 
         log.info("날씨 업데이트 스케쥴러 실행");
         List<Plan> planList = planRepository.findAll();
-
-//        if (!planList.isEmpty()) {
-//            throw new NullPointerException("업데이트 할 일정이 없습니다.");
-//        }
-
         for (Plan plan : planList) {
 
             if (LocalDateTime.now(ZoneId.of("Asia/Seoul")).isBefore(plan.getPlanDate())) {
 
                 weatherRepository.deleteAllByPlanId(plan.getId());
-
-                String API_KEY = "384994b16fb4098a5312b226bd2d76e5";
-                String PART = "current,minutely,hourly,alerts";
-                String LANG = "kr";
-
                 String address = plan.getLocation().getAddress();
                 LocalDateTime dayDate1 = plan.getPlanDate().truncatedTo(ChronoUnit.DAYS);
 
@@ -275,16 +256,11 @@ public class WeatherEventListener {
 //    }
 
     // 사용자가 plan 을 업데이트 했을 때
-    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, fallbackExecution = true)
     public void handleWeatherUpdateEvent(WeatherUpdateEvent weatherUpdateEvent) {
         Plan plan = weatherUpdateEvent.getPlan();
 
         weatherRepository.deleteAllByPlanId(plan.getId());
-
-        String API_KEY = "384994b16fb4098a5312b226bd2d76e5";
-        String PART = "current,minutely,hourly,alerts";
-        String LANG = "kr";
-
         String address = plan.getLocation().getAddress();
         LocalDateTime dayDate1 = plan.getPlanDate().truncatedTo(ChronoUnit.DAYS);
 
