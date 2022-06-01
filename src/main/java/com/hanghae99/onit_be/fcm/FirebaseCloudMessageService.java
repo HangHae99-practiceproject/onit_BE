@@ -67,7 +67,7 @@ public class FirebaseCloudMessageService {
 //    }
 
     // 구독 디바이스 푸쉬(topic)
-    private void sendSubscribeTopic(List<String> registrationTokens, String planUrl, String planId)
+    private void sendSubscribeTopic(List<String> registrationTokens, String planUrl, String planId, String alarmTime)
             throws FirebaseMessagingException, IOException {
         log.info("9.플랜 아이디 확인==== " + planId);
 //        List<String> registrationTokens =
@@ -85,21 +85,11 @@ public class FirebaseCloudMessageService {
         System.out.println(response.getSuccessCount() + " // 13.토큰들 구독 성공");
 
         // 구독한 주제에 메세지 요청
-//        Message message = Message.builder()
-//                .setNotification(Notification.builder()
-//                        .setTitle("온잇(Onit)")
-//                        .setBody("약속시간 1시간 전입니다. 친구들의 위치를 확인해보세요!")
-//                        .build())
-//                .setTopic(planId)
-//                .setWebpushConfig(WebpushConfig.builder()
-//                        .setFcmOptions(WebpushFcmOptions.withLink(fullPlanUrl))
-//                        .build())
-//                .build();
         Message message = Message.builder()
                 .setWebpushConfig(WebpushConfig.builder()
                         .setNotification(new WebpushNotification(
                                 "온잇(Onit)",
-                                "2-약속시간 1시간 전입니다. 친구들의 위치를 확인해보세요!"))
+                                "약속시간 1시간 전입니다. 친구들의 위치를 확인해보세요!"))
                         .setFcmOptions(WebpushFcmOptions.withLink(fullPlanUrl))
                         .build())
                 .setTopic(planId)
@@ -126,6 +116,7 @@ public class FirebaseCloudMessageService {
     // 메세지 요청 후 구독 해제
     public void unsubscribeToTopic (List<String> registrationTokens, String planId)
             throws FirebaseMessagingException, IOException {
+        log.info("토큰 리스트가 널떠?==== " + registrationTokens);
         TopicManagementResponse response3 = FirebaseMessaging.getInstance().unsubscribeFromTopic(
                 registrationTokens, planId);
         System.out.println(response3.getSuccessCount() + " // 15.토큰들 구독 해제");
@@ -134,7 +125,7 @@ public class FirebaseCloudMessageService {
 
 
     @Transactional
-    //@Scheduled(cron = "0 0/2 * * * *")
+    @Scheduled(cron = "0 0/5 * * * *")
     public void noticeScheduler() throws InterruptedException, FirebaseMessagingException, IOException {
         log.info(new Date() + "1.스케쥴러 실행");
 
@@ -146,6 +137,19 @@ public class FirebaseCloudMessageService {
         LocalDateTime tommorrowTime = todayTime.plusDays(1); // 2022-05-15 00:00
         log.info("4.내일 시작 시간===== " + tommorrowTime);
 
+        List<String> registrationTokens = new ArrayList<>();
+
+        List<User> userList = userRepository.findAll();
+        for (User user : userList) {
+            if ( !(user.getToken() == null) && !(user.getToken().isEmpty())) {
+                registrationTokens.add(user.getToken());
+            }
+        }
+        log.info("모든 토큰 리스트 개수==== " + registrationTokens.size());
+        unsubscribeToTopic(registrationTokens, "alarm");
+        log.info("기존 토큰의 구독 취소==== " + registrationTokens);
+
+
 //        ExecutorService executorService = newCachedThreadPool();
 
         // 현 시각 기준으로 오늘의 plan List를 조회 - isAllowed true & 일정이 오늘인 약속들만
@@ -153,36 +157,34 @@ public class FirebaseCloudMessageService {
         log.info("5.DB 조회 완료");
         log.info("6.오늘의 일정의 수===== " + planList.size());
 
+        LocalDateTime alarmTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+        log.info("알림시간 전송용==== " + alarmTime);
+        List<String> registrationTokens2 = new ArrayList<>();
         // 조회한 plan List 반복문 실행
         for (Plan plan : planList) {
             // 현재시간 기준 1시간 후 = alarmHours
             LocalDateTime planDate = plan.getPlanDate();
             LocalDateTime alarmHour = LocalDateTime.now().plusHours(1);
             int alarm = compareHour(alarmHour, planDate);
-//            log.info("7.약속시간 확인==== " + plan.getPlanDate());
-//            log.info("7-1.약속시간/알람시간/일치여부==== " + planDate + " //// " + alarmHour + " //// " + alarm);
-//            log.info(String.valueOf(alarmHour.truncatedTo(ChronoUnit.MINUTES)));
 
-//            List<User> alarmUserList = new ArrayList<>();
-            List<String> registrationTokens = new ArrayList<>();
             // 알림 시간 == 약속 시간일 때 사용자들에게 알림 푸쉬
             if (alarm == 0) {
-//                log.info("7-2.알림시간==== " + alarm);
-//                Long planId = plan.getId();
-//                log.info("플랜==== " + plan.getId());
-//                log.info("플랜의 유저==== " + plan.getUser().getId());
                 List<Participant> participantList = participantRepository.findAllByPlan(plan);
-//                log.info("7-3.참가자 수==== " + participantList.size());
+                log.info("7-3.참가자 수==== " + participantList.size());
                 for (Participant participant : participantList) {
-//                    log.info("8.참가자====" + participant.getUser().getNickname() + " //// " + participant.getUser().getId());
+                    log.info("8.참가자====" + participant.getUser().getNickname() + " //// " + participant.getUser().getId());
                     User user = participant.getUser();
 //                    sendSubscribeTopic(user);
-                    registrationTokens.add(user.getToken());
-//                    sendSubscribeTopic(registrationTokens,plan.getUrl(), String.valueOf(plan.getId()));
+                    String userToken;
+                    if (user.getToken() == null && user.getToken().isEmpty()) {
+                        userToken = "토큰 발급이 안된 디바이스";
+                    } else {
+                        userToken = user.getToken();
+                    }
+                    registrationTokens2.add(userToken);
                 }
-//                sendSubscribeTopic(registrationTokens,plan.getUrl());
-                sendSubscribeTopic(registrationTokens,plan.getUrl(), String.valueOf(plan.getId()));
-                unsubscribeToTopic(registrationTokens, String.valueOf(plan.getId()));
+                sendSubscribeTopic(registrationTokens2,plan.getUrl(), String.valueOf(plan.getId()), String.valueOf(alarmTime));
+                unsubscribeToTopic(registrationTokens2, String.valueOf(plan.getId()));
             }
         }
     }
@@ -194,19 +196,6 @@ public class FirebaseCloudMessageService {
         int compareResult = dayDate1.compareTo(dayDate2);
         return compareResult;
     }
-
-//    public Runnable task(String topic, String url) {
-//        return () -> {
-//            try {
-//                String body = "약속 시간 1시간 전입니다!";
-//                sendMessageTo(topic,"온잇(Onit)", body, url);
-//                log.info("13.push message 전송 요쳥");
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                log.error("14.push message 전송 실패");
-//            }
-//        };
-//    }
 
     // fcm 메세지 작성
 //    private String makeMessage( String topic, String title, String body, String url) throws JsonProcessingException {
@@ -233,19 +222,6 @@ public class FirebaseCloudMessageService {
 //
 //        log.info(objectMapper.writeValueAsString(fcmMessage));
 //        return objectMapper.writeValueAsString(fcmMessage);
-//    }
-
-
-    // AccessToken 발급 받기
-//    private String getAccessToken() throws IOException {
-//        String firebaseConfigPath = "firebase/onit-a1529-firebase-adminsdk-dw4dd-94859bec82.json";
-//
-//        GoogleCredentials googleCredential = GoogleCredentials.fromStream(new ClassPathResource(firebaseConfigPath)
-//                .getInputStream()).createScoped(Arrays.asList("https://www.googleapis.com/auth/firebase.messaging"));
-//
-//        googleCredential.refreshIfExpired();
-//        log.info("12.FCM access token 발급 성공");
-//        return googleCredential.getAccessToken().getTokenValue();
 //    }
 
 

@@ -37,7 +37,6 @@ public class FcmInitialize {
             logger.error(e.getMessage());
         }
     }
-
-
-
 }
+
+
