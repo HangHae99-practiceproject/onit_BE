@@ -170,20 +170,13 @@ public class PlanService {
                 String locationName = participant.getPlan().getLocation().getName();
                 String url = participant.getPlan().getUrl();
                 String penalty = participant.getPlan().getPenalty();
-                
                 String description = "없음";
-
                 LocalDate today = LocalDate.now(ZoneId.of("Asia/Seoul"));
-
                 LocalDate weatherDate = LocalDate.from(planDate.truncatedTo(ChronoUnit.DAYS));
-
-
                 // plan Date 가 오늘 날짜 기준 + 8 이라면
                 if (weatherDate.isBefore(today.plusDays(7))) {
-
                     Weather weather = weatherRepository.findByWeatherDateAndPlanId(weatherDate, planId);
                     description = weather.getDescription();
-
                 }
 
                 PlanResDto.MyPlanDto myPlanDto = new PlanResDto.MyPlanDto(planId, planName, planDate, locationName, url, description, penalty);
