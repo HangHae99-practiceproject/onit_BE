@@ -21,10 +21,8 @@ public class LogAspect {
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-
         // @LogExecutionTime 애노테이션이 붙어있는 타겟 메소드를 실행
         Object proceed = joinPoint.proceed();
-
         stopWatch.stop();
         logger.info(stopWatch.prettyPrint());
 

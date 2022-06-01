@@ -62,8 +62,6 @@ public class UserService {
 
         //사용자 profileImg 랜덤 이미지 부여
         String profileImg = imgList.get(0);
-        System.out.println(profileImg);
-
         User user = new User(username, password,nickname,role,profileImg);
         //return userRepository.save(user);
         userRepository.save(user);

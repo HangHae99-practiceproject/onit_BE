@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 public class MapDto {
+
     private Long planId;
     private String sender;
     private String profileImg;
