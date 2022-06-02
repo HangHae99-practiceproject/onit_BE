@@ -21,30 +21,19 @@ public class WebConfig implements WebMvcConfigurer {
     @Override public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:3000","https://imonint.shop/","https://localhost:3000","http://localhost:8080","https://onit-a1529.firebaseapp.com/","https://imonint.shop/ws","https://imonint.shop/details/**","https://onit-a1529.firebaseapp.com/")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
+                .allowedOrigins("http://localhost:3000","https://imonit.co.kr","https://imonint.shop/**","https://localhost:3000","http://localhost:8080","https://imonint.shop/member/**","https://zsoon.shop/ws","https://imonint.shop/details/**","https://imonint.shop/detail/**")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders("Authorization");
     }
 
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        final CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://imonint.shop/", "https://localhost:3000", "http://localhost:8080", "https://onit-a1529.firebaseapp.com/"));
-//        configuration.addAllowedHeader("*");
-//        configuration.addAllowedMethod("*");
-//        configuration.setAllowCredentials(true);
-//
-//        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOrigin("https://imonit.co.kr");
         configuration.addAllowedOrigin("https://localhost:3000");
-        configuration.addAllowedOrigin("https://onit-a1529.firebaseapp.com/");
+
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("*");

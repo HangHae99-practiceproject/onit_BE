@@ -1,7 +1,7 @@
 package com.hanghae99.onit_be.security.provider;
 
 import com.hanghae99.onit_be.entity.User;
-import com.hanghae99.onit_be.repository.UserRepository;
+import com.hanghae99.onit_be.user.UserRepository;
 import com.hanghae99.onit_be.security.UserDetailsImpl;
 import com.hanghae99.onit_be.security.jwt.JwtDecoder;
 import com.hanghae99.onit_be.security.jwt.JwtPreProcessingToken;
@@ -24,6 +24,7 @@ public class JWTAuthProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
+
         String token = (String) authentication.getPrincipal();
         String username = jwtDecoder.decodeUsername(token);
 
@@ -31,9 +32,10 @@ public class JWTAuthProvider implements AuthenticationProvider {
         //  -> 해결을 위해서는 UserDetailsImpl 에 User 객체를 저장하지 않도록 수정
         //  ex) UserDetailsImpl 에 userId, username, role 만 저장
         //    -> JWT 에 userId, username, role 정보를 암호화/복호화하여 사용
+
+
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Can't find " + username));
-
 
         UserDetailsImpl userDetails = new UserDetailsImpl(user);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

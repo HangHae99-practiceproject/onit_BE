@@ -3,14 +3,12 @@ package com.hanghae99.onit_be.noti;
 import com.hanghae99.onit_be.entity.Plan;
 import com.hanghae99.onit_be.entity.TimeStamped;
 import com.hanghae99.onit_be.entity.User;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
-import static com.hanghae99.onit_be.noti.NotificationType.EVENT_PARTICIPANT;
-import static com.hanghae99.onit_be.noti.NotificationType.PLAN_CRATED;
-
+@Setter
 @Getter
 @NoArgsConstructor
 @Entity
@@ -22,29 +20,28 @@ public class Notification extends TimeStamped {
     @Column(name = "notification_id")
     private Long id;
 
-    private String title;
-
     private String message;
 
-    private boolean checked;
+    private boolean isRead;
 
-    private String url;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    private String participantName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plan_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Plan plan;
 
     @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
 
-    public Notification(Plan plan, User user) {
-        this.title =plan.getPlanName();
-        this.message = "일정이 등록 되었습니다!";
-        this.checked = false;
-        this.url = plan.getUrl();
+    public void update(Plan plan, User user, String message, NotificationType notificationType) {
+        this.plan = plan;
         this.user = user;
-        this.participantName = user.getNickname();
-        this.notificationType = EVENT_PARTICIPANT;
+        this.message = message;
+        this.notificationType = notificationType;
+        this.isRead = false;
     }
 }

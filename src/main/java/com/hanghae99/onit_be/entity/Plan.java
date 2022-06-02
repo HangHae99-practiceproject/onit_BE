@@ -1,24 +1,26 @@
 package com.hanghae99.onit_be.entity;
 
-import com.hanghae99.onit_be.dto.request.PlanReqDto;
+import com.hanghae99.onit_be.plan.dto.PlanReqDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_plan")
-public class Plan extends TimeStamped implements Serializable {
+public class Plan extends TimeStamped {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "plan_id")
     private Long id;
+
 
     private String planName;
 
@@ -38,6 +40,13 @@ public class Plan extends TimeStamped implements Serializable {
 
     private String url;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
+    private final List<Weather> weatherList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Participant> participantList = new ArrayList<>();
+
 
     public Plan(PlanReqDto planReqDto, User user, String url) {
         this.planName = planReqDto.getPlanName();
@@ -46,38 +55,29 @@ public class Plan extends TimeStamped implements Serializable {
         this.writer = user.getNickname();
         this.penalty = planReqDto.getPenalty();
         this.url = url;
+        this.user = user;
     }
 
-    public Plan(Plan planNew, User user1) {
+    public Plan(Plan planNew) {
         this.planName = planNew.getPlanName();
         this.planDate = planNew.getPlanDate();
         this.penalty = planNew.getPenalty();
         this.url = planNew.getUrl();
         this.writer = planNew.getWriter();
         this.location = planNew.getLocation();
-        addPlan(user1);
     }
 
-    public void update(PlanReqDto planReqDto, LocalDateTime editTime) {
+    public void update(PlanReqDto planReqDto,User user) {
         this.planName = planReqDto.getPlanName();
-        this.planDate = editTime;
+        this.planDate = planReqDto.getPlanDate();
         this.location = planReqDto.getLocation();
         this.writer = user.getNickname();
         this.penalty = planReqDto.getPenalty();
     }
 
-    public void addPlan(User user) {
-        this.user = user;
-        user.getPlanList().add(this);
-    }
+//    public void addPlan(User user) {
+//        this.user = user;
+//        user.getPlanList().add(this);
+//    }
 
-    public void updateSave(Plan plan) {
-        this.planName = plan.getPlanName();
-        this.planDate = plan.getPlanDate();
-        this.url =plan.getUrl();
-        this.user = plan.getUser();
-        this.writer = plan.getWriter();
-        this.penalty = plan.getPenalty();
-        this.location = plan.getLocation();
-    }
 }

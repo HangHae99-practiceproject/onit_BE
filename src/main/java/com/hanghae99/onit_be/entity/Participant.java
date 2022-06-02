@@ -1,12 +1,14 @@
 package com.hanghae99.onit_be.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "tbl_participant")
 public class Participant {
@@ -24,8 +26,11 @@ public class Participant {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
+    private LocalDateTime planDate;
+
     public Participant(Plan planNew, User user1) {
         this.plan = planNew;
         this.user = user1;
+        this.planDate = planNew.getPlanDate();
     }
 }

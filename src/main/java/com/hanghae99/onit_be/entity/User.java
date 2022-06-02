@@ -1,6 +1,7 @@
 package com.hanghae99.onit_be.entity;
 
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "tbl_user")
 public class User {
@@ -19,7 +20,7 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String nickname;
 
     @Column
@@ -28,6 +29,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Lob
     @Column(nullable = false)
     private String profileImg;
 
@@ -46,8 +48,8 @@ public class User {
     @Column
     private String token;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Plan> planList = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Plan> planList = new ArrayList<>();
 
 
     public User(Builder builder) {
@@ -75,6 +77,16 @@ public class User {
 
     public User(String token) {
         this.token = token;
+    }
+
+    public User(Long kakaoId, String nickName, String encodedPassword, String profileImg) {
+        this.kakaoId = kakaoId;
+        this.username = nickName;
+        this.nickname = nickName;
+        this.password = encodedPassword;
+        this.profileImg = profileImg;
+        this.userRole = UserRoleEnum.USER;
+        this.isNoticeAllowed = false;
     }
 
     // 이미지 수정 메서드

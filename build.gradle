@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.7'
+    id 'org.springframework.boot' version '2.6.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -40,6 +40,7 @@ dependencies {
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'javax.servlet:jstl'
     //json
+
     implementation group: 'org.json', name: 'json', version: '20160810'
     // JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
@@ -49,9 +50,17 @@ dependencies {
     implementation 'com.auth0:java-jwt:3.13.0'
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
 
-
+    //fcm
     implementation 'com.google.firebase:firebase-admin:8.1.0'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.2.2'
+//    implementation 'com.google.firebase:firebase-messaging:21.1.0'
+
+    // jasypt
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+
+    //swagger
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 
 }
 

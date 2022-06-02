@@ -18,12 +18,14 @@ public class UserDetailsImpl implements UserDetails {
         this.user = user;
     }
 
-
     public User getUser() {
         return user;
     }
 
     public String getNickName() { return user.getNickname();}
+
+    public String getProfileImg() { return user.getProfileImg();}
+
     @Override
     public String getPassword() {
         return user.getPassword();
