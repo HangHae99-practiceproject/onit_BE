@@ -116,7 +116,7 @@ public class FirebaseCloudMessageService {
     // 메세지 요청 후 구독 해제
     public void unsubscribeToTopic (List<String> registrationTokens, String planId)
             throws FirebaseMessagingException, IOException {
-        log.info("토큰 리스트가 널떠?==== " + registrationTokens);
+        log.info("토큰 리스트 재확인==== " + registrationTokens);
         TopicManagementResponse response3 = FirebaseMessaging.getInstance().unsubscribeFromTopic(
                 registrationTokens, planId);
         System.out.println(response3.getSuccessCount() + " // 15.토큰들 구독 해제");

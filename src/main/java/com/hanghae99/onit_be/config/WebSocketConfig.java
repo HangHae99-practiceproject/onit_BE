@@ -1,5 +1,6 @@
-package com.hanghae99.onit_be.websocket;
+package com.hanghae99.onit_be.config;
 
+import com.hanghae99.onit_be.websocket.ChannelInterceptorImpl;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
