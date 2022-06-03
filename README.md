@@ -3,8 +3,6 @@
 <!--  ### 지각없이 즐겁게 모이는 방법 Onit! <br> -->
  ### 소중한 사람들과의 만남을 손쉽게 만들어주고 관리해주는 서비스 Onit!
  #### [👉 Onit 사용해보기! 👈](https://imonit.co.kr)
- <br>
- #### [👉 Onit 팀노션 구경하기 👈](https://www.notion.so/Onit-12652fee9f854ccc9bc233590dbd064a)
  
 <br>
  🗓 프로젝트 기간 <br>
@@ -67,32 +65,22 @@
 
 <br>
 
-## ㅣ백엔드 팀원 소개
-<br>
-
-| 이름     | 깃허브 주소                                                | 
-|:--------:|:----------------------------------------------------------:|
-| 문현상   | [https://github.com/bigtyno931128](https://github.com/bigtyno931128)                   |
-| 양지선   | [https://github.com/zsoon96](https://github.com/zsoon96)                       |
-<br>
-
-
 ## ㅣ백엔드 기술 스택
 <!-- <p align="center"> -->
-<img src="https://img.shields.io/badge/-Java-007396?style=flat&logo=Java">
- <img src="https://img.shields.io/badge/-Spring-000000?style=flat&logo=Spring">
- <img src="https://img.shields.io/badge/-Springboot-000000?style=flat&logo=Springboot">
- <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat-square&logo=Spring Security&logoColor=white">
- <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+<img src="https://img.shields.io/badge/-Java-007396?style=flat&logo=Java"/>
+ <img src="https://img.shields.io/badge/-Spring-000000?style=flat&logo=Spring"/>
+ <img src="https://img.shields.io/badge/-Springboot-000000?style=flat&logo=Springboot"/>
+ <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat-square&logo=Spring Security&logoColor=white"/>
+ <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"/>
  </br>
- <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white">
- <img src="https://img.shields.io/badge/Amazon EC2-569A31?style=for-the-badge&logo=Amazon EC2&logoColor=white">
- <img src="https://img.shields.io/badge/SSL-721412?style=for-the-badge&logo=SSL&logoColor=white">
- <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white">
+ <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Amazon EC2-569A31?style=for-the-badge&logo=Amazon EC2&logoColor=white"/>
+ <img src="https://img.shields.io/badge/SSL-721412?style=for-the-badge&logo=SSL&logoColor=white"/>
+ <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/>
  </br>
- <img src="https://img.shields.io/badge/Stomp-010101?style=flat-square&logo=Stomp&logoColor=white">
- <img src="https://img.shields.io/badge/Socket.js-010101?style=for-the-badge&logo=Socket.js&logoColor=white">
- <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white">
+ <img src="https://img.shields.io/badge/Stomp-010101?style=flat-square&logo=Stomp&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Socket.js-010101?style=for-the-badge&logo=Socket.js&logoColor=white"/>
+ <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
 </br>
 </p>
 <br>
@@ -103,5 +91,35 @@
 - **Database** : Mysql (AWS RDS)
 - **ETC** : AWS S3, AWS IAM, NginX, Firebase Cloud Messaging
 <br>
+<br>
+
+## ㅣ백엔드 팀원 소개
+<br>
+
+<table>
+   <tr>
+    <td align="center" width="20%"><b>name</b></td>
+    <td align="center"width="10%"><b>postion</b></td>
+    <td align="center"width="40%"><b>work</b></td>
+    <td align="center"width="30%"><b>github</b></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/hyeonjun4460"><b>문현상</b></a></td>
+    <td align="center">leader</td>
+    <td align="center">로그인&회원가입 / 소셜 로그인 / 날씨 api / SSE 알림 / 일정 CRUD / 웹소켓</td>
+    <td align="center">[https://github.com/bigtyno931128](https://github.com/bigtyno931128)</td>
+  </tr>
+    <tr>
+    <td align="center"><a href="https://github.com/inmyblue"><b>양지선</b></a></td>
+    <td align="center">member</td>
+    <td align="center">마이페이지 CRUD / 이미지 업로드 / FCM 알림 / 리팩토링 / 서버구축</td>
+    <td align="center">[https://github.com/zsoon96](https://github.com/zsoon96)</td>
+  </tr>
+</table>
+
+| 이름     | 깃허브 주소                                                | 
+|:--------:|:----------------------------------------------------------:|
+| 문현상   | [https://github.com/bigtyno931128](https://github.com/bigtyno931128)                   |
+| 양지선   | [https://github.com/zsoon96](https://github.com/zsoon96)                       |
 <br>
 <br>
