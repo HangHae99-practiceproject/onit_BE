@@ -57,6 +57,11 @@
 </details>
 <br>
 
+## ㅣ시연 영상
+https://user-images.githubusercontent.com/101077108/171681910-c41d2fd9-7132-436c-99e9-58f783a31f92.mp4
+
+<br>
+
 ## ㅣ서비스 아키텍쳐
 <img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F985566b9-39a0-4ad9-808f-5e5401825820%2FUntitled.jpeg?table=block&id=f53ee272-0395-4dbf-a60b-bc4f574a294c&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2" width="800">
 <br>
