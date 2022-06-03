@@ -65,27 +65,17 @@
 
 <br>
 
-## ㅣ백엔드 기술 스택
-<!-- <p align="center"> -->
-<img src="https://img.shields.io/badge/-Java-007396?style=flat&logo=Java"/>
- <img src="https://img.shields.io/badge/-Spring-000000?style=flat&logo=Spring"/>
- <img src="https://img.shields.io/badge/-Springboot-000000?style=flat&logo=Springboot"/>
- <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat-square&logo=Spring Security&logoColor=white"/>
- <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"/>
- </br>
- <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white"/>
- <img src="https://img.shields.io/badge/Amazon EC2-569A31?style=for-the-badge&logo=Amazon EC2&logoColor=white"/>
- <img src="https://img.shields.io/badge/SSL-721412?style=for-the-badge&logo=SSL&logoColor=white"/>
- <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/>
- </br>
- <img src="https://img.shields.io/badge/Stomp-010101?style=flat-square&logo=Stomp&logoColor=white"/>
- <img src="https://img.shields.io/badge/Socket.js-010101?style=for-the-badge&logo=Socket.js&logoColor=white"/>
- <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
+## ㅣ기술 스택
+<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat-square&logo=Spring Security&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Stomp-010101?style=flat-square&logo=Stomp&logoColor=white"/> <img src="https://img.shields.io/badge/Socket-010101?style=flat-square&logo=Socket.io&logoColor=white"/> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat-square&logo=Amazon S3&logoColor=white"/> <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white"/> <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/> <img src="https://img.shields.io/badge/SSL-721412?style=for-the-badge&logo=SSL&logoColor=white"/>
 </br>
-</p>
+
 <br>
 
-## ㅣ백엔드 개발환경
+## ㅣ개발환경
 - **Server** : AWS EC2(Ubuntu)
 - **Framework** : Springboot
 - **Database** : Mysql (AWS RDS)
@@ -93,8 +83,13 @@
 <br>
 <br>
 
-## ㅣ백엔드 팀원 소개
+## ㅣ팀원 소개
 <br>
+
+name | position | work | github
+-|-|-|-
+문현상 | BE/Spring | 로그인&회원가입 / 소셜 로그인 / 날씨 api / SSE 알림 / 일정 CRUD / 웹소켓 | https://github.com/bigtyno931128
+양지선 | BE/Spring | 마이페이지 CRUD / 이미지 업로드 / FCM 알림 / 리팩토링 / 서버구축 | https://github.com/zsoon96
 
 <table>
    <tr>
@@ -118,4 +113,6 @@
 </table>
 
 <br>
+<br>
+#### [👉 Onit 팀노션 👈](https://www.notion.so/Onit-12652fee9f854ccc9bc233590dbd064a)
 <br>
