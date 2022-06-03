@@ -65,8 +65,6 @@
 
 <img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F985566b9-39a0-4ad9-808f-5e5401825820%2FUntitled.jpeg?table=block&id=f53ee272-0395-4dbf-a60b-bc4f574a294c&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2" width="800">
 
-<!-- ![image](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F985566b9-39a0-4ad9-808f-5e5401825820%2FUntitled.jpeg?table=block&id=f53ee272-0395-4dbf-a60b-bc4f574a294c&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2) -->
-
 <br>
 
 ## ㅣ백엔드 팀원 소개
