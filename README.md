@@ -24,7 +24,7 @@
   <ul>
     <li>홈 화면에서는 전체 일정, 내가 만든 일정, 내가 참여 한 일정들을 볼 수 있으며, 앞으로의 일정들 중에 가장 가까운 일정 순으로 볼 수 있습니다!</li>
     <li>날씨 정보는 오늘로 부터 최대 +8 일까지의 날씨 예보 정보만 전달합니다!</li>
-    <img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4bd4f3a3-2d3f-4617-93e0-b43aff314831%2FUntitled.png?table=block&id=3cd510b7-6b13-4359-a257-9ea18f51a69b&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2" width="700">
+    <img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4bd4f3a3-2d3f-4617-93e0-b43aff314831%2FUntitled.png?table=block&id=3cd510b7-6b13-4359-a257-9ea18f51a69b&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2" width="150">
   </ul>
 </details>
 
@@ -63,7 +63,9 @@
 
 ## ㅣ서비스 아키텍쳐
 
-![image](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F985566b9-39a0-4ad9-808f-5e5401825820%2FUntitled.jpeg?table=block&id=f53ee272-0395-4dbf-a60b-bc4f574a294c&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2)
+<img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F985566b9-39a0-4ad9-808f-5e5401825820%2FUntitled.jpeg?table=block&id=f53ee272-0395-4dbf-a60b-bc4f574a294c&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2" width="800">
+
+<!-- ![image](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F985566b9-39a0-4ad9-808f-5e5401825820%2FUntitled.jpeg?table=block&id=f53ee272-0395-4dbf-a60b-bc4f574a294c&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2) -->
 
 <br>
 
