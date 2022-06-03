@@ -58,7 +58,7 @@
 <br>
 
 ## ㅣ시연 영상
-https://user-images.githubusercontent.com/101077108/171681910-c41d2fd9-7132-436c-99e9-58f783a31f92.mp4
+<img src="https://user-images.githubusercontent.com/101077108/171681910-c41d2fd9-7132-436c-99e9-58f783a31f92.mp4" width="800">
 
 <br>
 
