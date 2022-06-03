@@ -78,7 +78,6 @@
 <br>
 
 ## ㅣ팀원 소개
-<br>
 name | position | work | github
 -|-|-|-
 문현상 | BE/Spring | 로그인&회원가입 / 소셜 로그인 / 날씨 api / SSE 알림 / 일정 CRUD / 웹소켓 | https://github.com/bigtyno931128
