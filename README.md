@@ -5,10 +5,10 @@
  #### [👉 Onit 사용해보기! 👈](https://imonit.co.kr)
  
 <br>
- 🗓 프로젝트 기간
+ 🗓 프로젝트 기간 <br>
  2022/04/22~ 2022/06/03
 <br>
-
+<br>
 <img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6b031cca-f62a-4780-b616-fb8e6b9d043e%2FUntitled.png?table=block&id=7ce0e1b2-8c95-4490-9940-aa4467baebd9&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2" width="800">
 
 <br>
@@ -92,7 +92,7 @@ name | position | work | github
 
 <br>
 <br>
-## ㅣMore Info!
-[👉 Onit 팀노션 👈](https://www.notion.so/Onit-12652fee9f854ccc9bc233590dbd064a)
-<br>
-<br>
+
+## ㅣMore Info
+#### [👉 Onit 팀노션 👈](https://www.notion.so/Onit-12652fee9f854ccc9bc233590dbd064a)
+[🔐 ErunJrun Front-End Repository](https://github.com/ErunJrun/ErunJrun_FE)  
