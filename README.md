@@ -100,26 +100,22 @@
    <tr>
     <td align="center" width="20%"><b>name</b></td>
     <td align="center"width="10%"><b>postion</b></td>
-    <td align="center"width="40%"><b>work</b></td>
-    <td align="center"width="30%"><b>github</b></td>
+    <td align="center"width="30%"><b>work</b></td>
+    <td align="center"width="20%"><b>github</b></td>
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/hyeonjun4460"><b>문현상</b></a></td>
-    <td align="center">leader</td>
+    <td align="center">BE/Spring</td>
     <td align="center">로그인&회원가입 / 소셜 로그인 / 날씨 api / SSE 알림 / 일정 CRUD / 웹소켓</td>
-    <td align="center">[https://github.com/bigtyno931128](https://github.com/bigtyno931128)</td>
+    <td align="center">https://github.com/bigtyno931128</td>
   </tr>
     <tr>
     <td align="center"><a href="https://github.com/inmyblue"><b>양지선</b></a></td>
-    <td align="center">member</td>
+    <td align="center">BE/Spring</td>
     <td align="center">마이페이지 CRUD / 이미지 업로드 / FCM 알림 / 리팩토링 / 서버구축</td>
-    <td align="center">[https://github.com/zsoon96](https://github.com/zsoon96)</td>
+    <td align="center">https://github.com/zsoon96</td>
   </tr>
 </table>
 
-| 이름     | 깃허브 주소                                                | 
-|:--------:|:----------------------------------------------------------:|
-| 문현상   | [https://github.com/bigtyno931128](https://github.com/bigtyno931128)                   |
-| 양지선   | [https://github.com/zsoon96](https://github.com/zsoon96)                       |
 <br>
 <br>
