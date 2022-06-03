@@ -11,10 +11,9 @@
 
 <br>
 
-
    <img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6b031cca-f62a-4780-b616-fb8e6b9d043e%2FUntitled.png?table=block&id=7ce0e1b2-8c95-4490-9940-aa4467baebd9&spaceId=463f09cf-d923-4a50-987a-3a8003b3e55d&width=2000&userId=267beb3c-c489-4fc9-a200-c7f637d0b32c&cache=v2" width="800">
 
-<br><br>
+<br>
 
 ## ㅣ주요 기능
 <br>
